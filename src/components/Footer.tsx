@@ -9,21 +9,12 @@ export default function Footer() {
       {/* Thin gradient accent at the very top of the footer */}
       <div className="h-[4px] w-full bg-gradient-to-r from-[#17b4a1] via-[#1d8a7d] to-[#5f6acb]" />
 
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex items-center justify-between gap-4">
           {/* Left: Logo + title */}
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-md bg-[#17b4a1] flex items-center justify-center text-[#0e1520] text-sm">🥑</div>
             <span className="text-base font-semibold text-white">DIDDYDIDDY</span>
-          </div>
-          {/* Center: copyright & links (centered) */}
-          <div className="text-center text-xs text-gray-400">
-            <span>© 2026 DIDDYDIDDY</span>
-            <Link href="/tos" className="hover:text-gray-300 transition-colors underline">terms of service</Link>
-            <span className="mx-2">•</span>
-            <a href="https://twitch.tv/guacamolemolly" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors underline">sponsored by guacamolemolly</a>
-            <span className="mx-2">•</span>
-            <span className="hover:text-gray-300 transition-colors underline cursor-pointer">powered by cocucku_13</span>
           </div>
 
           {/* Right: action buttons aligned to the right */}
@@ -37,8 +28,16 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Mobile: show links stacked below */}
-            <div className="mt-3 md:hidden text-xs text-gray-400 text-center">© 2026 DIDDYDIDDY • terms of service • sponsored by guacamolemolly • powered by cocucku_13</div>
+        {/* Bottom: small centered links */}
+        <div className="mt-6 border-t border-[#0f1720] pt-4 text-center text-xs text-gray-400">
+          <span>© 2026 DIDDYDIDDY</span>
+          <span className="mx-2">•</span>
+          <Link href="/tos" className="hover:text-gray-300 transition-colors underline">terms of service</Link>
+          <span className="mx-2">•</span>
+          <a href="https://twitch.tv/mrdiddy" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors underline">sponsored by mrdiddy</a>
+          <span className="mx-2">•</span>
+          <span className="hover:text-gray-300 transition-colors underline cursor-pointer">powered by mrdiddy</span>
+        </div>
       </div>
     </footer>
   );
