@@ -3,13 +3,23 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
+type User = {
+  username: string;
+  joinedMonths?: number;
+  online?: boolean;
+  files?: number;
+  likes?: number;
+  views?: number;
+  achievements?: { total: number; unlocked: number };
+};
+
 export default function ClientUserMenu() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem("user");
-      if (raw) setUser(JSON.parse(raw));
+      if (raw) setUser(JSON.parse(raw) as User);
     } catch (e) {}
   }, []);
 

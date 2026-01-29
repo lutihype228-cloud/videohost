@@ -380,7 +380,7 @@ export default function ShopPage() {
                   id={p.id}
                   title={p.title}
                   price={p.price}
-                  tag={p.tag as any}
+                  tag={p.tag as "IMG" | "GIF"}
                   image={p.image}
                   disabled={purchased.includes(p.id)}
                   onBuy={handleBuy}

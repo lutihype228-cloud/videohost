@@ -19,6 +19,9 @@ import {
   Folder,
 } from "lucide-react";
 
+// Icon component type used across the page
+type IconType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
+
 import { useParams } from "next/navigation";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -71,7 +74,7 @@ const formatNumber = (num: number): string => {
 type TabType = "media" | "achievements" | "files" | "hidden" | "liked";
 
 export default function ProfilePage() {
-  const params = useParams() as any;
+  const params = useParams() as { name?: string };
   const name = params?.name;
 
   // Load user from localStorage if available, otherwise use defaults from the design
@@ -95,7 +98,7 @@ export default function ProfilePage() {
 
   const [activeTab, setActiveTab] = useState<TabType>("achievements");
 
-  const tabs = [
+  const tabs: { id: TabType; label: string; icon: IconType }[] = [
     { id: "media", label: "Медиа", icon: Image },
     { id: "achievements", label: "Достижения", icon: Trophy },
     { id: "files", label: "Файлы", icon: FileText },
@@ -327,7 +330,7 @@ export default function ProfilePage() {
         {/* Tab Navigation */}
         <div className="flex flex-wrap gap-2 mb-8">
           {tabs.map((tab) => {
-            const Icon = tab.icon as any;
+            const Icon = tab.icon as IconType;
             const isActive = activeTab === tab.id;
             return (
               <button
@@ -411,7 +414,7 @@ export default function ProfilePage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {progressAchievements.map((achievement) => {
-                  const Icon = achievement.icon as any;
+                  const Icon = achievement.icon as IconType;
                   const colorClasses = getColorClasses(achievement.color);
                   return (
                     <div
@@ -469,7 +472,7 @@ export default function ProfilePage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {challengeAchievements.map((achievement) => {
-                  const Icon = achievement.icon as any;
+                  const Icon = achievement.icon as IconType;
                   const colorClasses = getColorClasses(achievement.color);
                   return (
                     <div

@@ -39,22 +39,23 @@ export function DropdownMenu({ children }: { children: React.ReactNode }) {
   )
 }
 
-export const DropdownMenuTrigger = ({ children }: any) => {
+export const DropdownMenuTrigger = ({ children, asChild }: { children: React.ReactNode; asChild?: boolean }) => {
   const ctx = useContext(DropdownContext)
   if (!ctx) return <span className="inline-block">{children}</span>
 
   if (!React.isValidElement(children)) return <span className="inline-block">{children}</span>
-  const childEl = children as React.ReactElement<any>
+  const childEl = children as React.ReactElement<React.HTMLAttributes<HTMLElement>>
 
   return React.cloneElement(childEl, {
-    onClick: (e: any) => {
-      if (typeof childEl.props?.onClick === "function") childEl.props.onClick(e)
+    onClick: (e: React.MouseEvent) => {
+      const originalOnClick = childEl.props?.onClick as ((e: React.MouseEvent) => void) | undefined
+      if (typeof originalOnClick === "function") originalOnClick(e)
       ctx.toggle()
     },
   })
-}
+} 
 
-export const DropdownMenuContent = ({ children, className = "" }: any) => {
+export const DropdownMenuContent = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
   const ctx = useContext(DropdownContext)
   if (!ctx || !ctx.open) return null
   return (
@@ -62,9 +63,9 @@ export const DropdownMenuContent = ({ children, className = "" }: any) => {
       {children}
     </div>
   )
-}
+} 
 
-export const DropdownMenuItem = ({ children, className = "", onClick }: any) => {
+export const DropdownMenuItem = ({ children, className = "", onClick }: { children: React.ReactNode; className?: string; onClick?: (e: React.MouseEvent) => void }) => {
   const ctx = useContext(DropdownContext)
   return (
     <div
